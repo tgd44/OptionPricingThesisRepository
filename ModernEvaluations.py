@@ -90,12 +90,12 @@ for file_name, file_path in file_paths.items():
 
     # List of models with hyperparameters
     models = {
-        'SVR': (SVR(), {'C': [0.1, 1, 10], 'epsilon': [0.01, 0.1, 0.5], 'kernel': ['rbf']}),
-        'RandomForest': (RandomForestRegressor(random_state=42), {'n_estimators': [1, 2, 4 ,8 ,16, 32, 64, 100, 200], 'max_depth': [3, 5, 7], 'min_samples_split': [2, 5], 'criterion' : ['squared_error']}),
+        'SVR': (SVR(), {'C': [1, 10, 50, 100], 'epsilon': [0.01, 0.1, 0.3],'kernel': ['rbf', 'linear', 'poly'], 'degree': [2, 3]}),
+        'RandomForest': (RandomForestRegressor(random_state=42), {'n_estimators': [1, 2, 4 ,8 ,16, 32, 64, 100, 200, 300], 'max_depth': [3, 5, 7], 'min_samples_split': [2, 5, 8, 10], 'criterion' : ['squared_error']}),
         'XGBoost': (XGBRegressor(random_state=42), {'n_estimators': [100, 200, 300, 400, 500, 600, 700 ,800, 900, 1000], 'learning_rate': [0.01, 0.05, 0.1, 0.2, 0.3], 'max_depth': [3, 4, 5, 6, 7, 8, 9, 10]}),
         'LGBM': (LGBMRegressor(random_state=42), {'min_data_in_leaf':[10, 20, 50, 100, 200, 300] ,'n_estimators': [100, 200, 300, 400, 500, 600 ,700 ,800, 900, 1000], 'learning_rate': [0.01, 0.05, 0.1, 0.2, 0.3], 'num_leaves': [32, 64, 128, 256], 'max_depth':[3, 4, 5, 6, 7, 8, 9 , 10]}),
-        'MLP': (MLPRegressor(random_state=42), {'hidden_layer_sizes': [(4,), (4, 3,), (4,3,2,), (32,), (128,), (128, 64,), (128,64,32,), (128, 64, 32, 16,), (100,100,),(50,50,),(150,150,),(100,),(50,),(150,),(100,100,100,), (50,50,50,),(150,150,150,), (50,50,50,50,),(150,150,150,150,),(100,100,100,100,)], 'activation': ['relu'], 'solver': ['adam', 'lbfgs', 'sgd']})
-    }
+        'MLP': (MLPRegressor(random_state=42), {'hidden_layer_sizes': [(4,), (4, 3,), (4,3,2,), (32,), (128,), (128, 64,), (128,64,32,), (128, 64, 32, 16,), (100,100,),(50,50,),(150,150,),(100,),(50,),(150,),(100,100,100,), (50,50,50,),(150,150,150,), (50,50,50,50,),(150,150,150,150,),(100,100,100,100,)], 'activation': ['relu'], 'solver': ['adam'], 'max_iter':[10000]})
+
 
     # Train each model and evaluate
     for model_name, (model, param_grid) in models.items():
